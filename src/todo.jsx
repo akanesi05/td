@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./styles.css";
 
 export const Todo = () => {
   const [incompleteTodos, setIncompleteTodos] = useState([
@@ -71,5 +72,4 @@ export const Todo = () => {
     </>
   );
 };
-
 
