@@ -13,8 +13,10 @@ export const Todo = () => {
   ]);
   const onChangeTodotext = (event) => setTodoText(event.target.value);
   const onClickAdd = () => {
+    if (todoText == "") return/*空文字ならここで終了*/
     const newTodos = [...incompleteTodos, todoText];
     setIncompleteTodos(newTodos);
+    setTodoText("");/*入力した後からの配列にする*/
   };
   return (
     <>
