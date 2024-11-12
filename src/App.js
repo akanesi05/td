@@ -25,7 +25,15 @@ export const Todo = () => {
     setIncompleteTodos(newTodos);/*その値をステートで更新する*/
   };
     
-  
+  const onClickComplete = (index) => {
+    const newProgressTodos = [...incompleteTodos];
+    newProgressTodos.splice(index, 1);
+
+    const updatedProgressTodos = [...inprogressTodos, incompleteTodos[index]];
+
+    setIncompleteTodos(newProgressTodos);
+    setProgressTodos(updatedProgressTodos);
+  }
   return (
     <>
       <div>
@@ -44,7 +52,7 @@ export const Todo = () => {
             <li key={todo}>
               <div className="incomplete-area">
                 <p className="title">{todo}</p>
-                <button>完了</button>
+                <button  onClick={() => onClickComplete(index)}>着手</button>
                 <button  onClick={() => onClickDelete(index)}>削除</button>
               </div>
             </li>
@@ -59,7 +67,7 @@ export const Todo = () => {
               <div className="incomplete-area">
                 <p className="title">{todo}</p>
                 <button>戻る</button>
-                <button>完了</button>
+                <button >完了</button>
               </div>
             </li>
           ))}
