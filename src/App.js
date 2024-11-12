@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 export const Todo = () => {
   const [incompleteTodos, setIncompleteTodos] = useState([
     "TODOです1",
@@ -28,7 +29,7 @@ export const Todo = () => {
   const onClickComplete = (index) => {
     const newProgressTodos = [...incompleteTodos];
     newProgressTodos.splice(index, 1);
-
+    /* onClick〇〇と関数の名前を決めて定義していい*/
     const updatedProgressTodos = [...inprogressTodos, incompleteTodos[index]];
 
     setIncompleteTodos(newProgressTodos);
