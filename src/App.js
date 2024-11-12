@@ -34,6 +34,16 @@ export const Todo = () => {
     setIncompleteTodos(newProgressTodos);
     setProgressTodos(updatedProgressTodos);
   }
+
+  const onClickProgress = (index) => {
+    const newcompleteTodos = [...inprogressTodos];
+    newcompleteTodos.splice(index, 1);
+
+    const updatedcompleteTodos = [...completeTodos, inprogressTodos[index]];
+
+    setProgressTodos(newcompleteTodos);
+    setCompleteTodos(updatedcompleteTodos);
+  }
   return (
     <>
       <div>
@@ -62,12 +72,12 @@ export const Todo = () => {
       <div>
         <p>進行中</p>
         <ul>
-          {inprogressTodos.map((todo) => (
+          {inprogressTodos.map((todo,index) => (
             <li key={todo}>
               <div className="incomplete-area">
                 <p className="title">{todo}</p>
                 <button>戻る</button>
-                <button >完了</button>
+                <button onClick={() => onClickProgress(index)}>完了</button>
               </div>
             </li>
           ))}
