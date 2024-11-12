@@ -44,6 +44,19 @@ export const Todo = () => {
     setProgressTodos(newcompleteTodos);
     setCompleteTodos(updatedcompleteTodos);
   }
+
+  const onClickBack = (index) => {
+    const newCompleteTodos = [...completeTodos];
+    newCompleteTodos.splice(index, 1);
+
+    const newIncompleteTodos = [...incompleteTodos, completeTodos[index]];
+
+    setCompleteTodos(newCompleteTodos);
+    setIncompleteTodos(newIncompleteTodos);
+  }
+
+  
+
   return (
     <>
       <div>
@@ -76,7 +89,7 @@ export const Todo = () => {
             <li key={todo}>
               <div className="incomplete-area">
                 <p className="title">{todo}</p>
-                <button>戻る</button>
+                <button onClick={() => onClickBack(index)}>戻る  </button>
                 <button onClick={() => onClickProgress(index)}>完了</button>
               </div>
             </li>
@@ -86,11 +99,11 @@ export const Todo = () => {
       <div>
         <p>完了</p>
         <ul>
-          {completeTodos.map((todo) => (
+          {completeTodos.map((todo,index) => (
             <li key={todo}>
               <div className="incomplete-area">
                 <p className="title">{todo}</p>
-                <button>戻る</button>
+                <button onClick={() =>  onClickBack(index)} >戻る</button>
               </div>
             </li>
           ))}
