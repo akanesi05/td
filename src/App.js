@@ -2,16 +2,15 @@ import { useState } from "react";
 
 
 export const Todo = () => {
-  const [incompleteTodos, setIncompleteTodos] = useState([
-    "TODOです1",
-    "TODOです2",
-  ]);
+  const [incompleteTodos, setIncompleteTodos] = useState([ {id:1,status:"完了",title:"タスク1",detail:"タスク１の詳細です"},{id:2,status:"未完了",title:"タスク2",detail:"タスク2の詳細です"}]);
+
+  
   const [todoText, setTodoText] = useState("");
-  const [inprogressTodos, setProgressTodos] = useState(["進行中1", "進行中2"]);
+  const [inprogressTodos, setProgressTodos] = useState([]);
   const [completeTodos, setCompleteTodos] = useState([
-    "TODOでした1",
-    "TODOでした2",
+  
   ]);
+  const [todoDescription,setTodoDescription]=useState([])
   const onChangeTodotext = (event) => setTodoText(event.target.value);
   const onClickAdd = () => {
     if (todoText == "") return/*空文字ならここで終了*/
@@ -61,21 +60,27 @@ export const Todo = () => {
   return (
     <>
       <div>
+        <h5>Live遠征の前にやること</h5>
         <input
           placeholder="追加フォーム"
           value={todoText}
           onChange={onChangeTodotext}
         />
+         {/* <input
+          placeholder="説明"
+          value={todoDescription}
+          onChange={onChangeTodoDescription}
+        /> */}
+        <input type="todoDescription" label="説明" />
         <button onClick={onClickAdd}>追加</button>
       </div>
       <div>
-        <p className="title">未完了のTODO</p>
-        {/*一覧を表示させる */}
+        <p className="title">未完了</p>
         <ul>
           {incompleteTodos.map((todo,index) => (
-            <li key={todo}>
+            <li key={todo.id}>
               <div className="incomplete-area">
-                <p className="title">{todo}</p>
+                <p className="title">{todo.title}</p>
                 <button  onClick={() => onClickComplete(index)}>着手</button>
                 <button  onClick={() => onClickDelete(index)}>削除</button>
               </div>
