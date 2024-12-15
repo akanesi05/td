@@ -2,27 +2,37 @@ import { useState } from "react";
 
 
 export const Todo = () => {
-  const [incompleteTodos, setIncompleteTodos] = useState([ {id:1,status:"完了",title:"タスク1",detail:"タスク１の詳細です"},{id:2,status:"未完了",title:"タスク2",detail:"タスク2の詳細です"}]);
+  const [incompleteTodos, setIncompleteTodos] = useState([ {id:1,status:"完了",title:"うちわ",detail:"ファンサうちわ作る"},{id:2,status:"未完了",title:"新幹線",detail:"指定席取る"}]);
 
-  
+  const [todoDetail, setTodoDetail] = useState("")
   const [todoText, setTodoText] = useState("");
+  const [todoId, setTodoId] = useState(incompleteTodos.length + 1)
   const [inprogressTodos, setProgressTodos] = useState([]);
   const [completeTodos, setCompleteTodos] = useState([
   
   ]);
-  const [todoDescription,setTodoDescription]=useState([])
+  //const [todoDescription,setTodoDescription]=useState([])
   const onChangeTodotext = (event) => setTodoText(event.target.value);
+  const onChangeTododetail = (event) => setTodoDetail(event.target.value);
+  
+  
+  // const onClickAdd = () => {
+  //   if (todoText == "") return/*空文字ならここで終了*/
+  //   const newTodos = [...incompleteTodos, todoText];このコードだと配列のままなのでリストに追加されない
+  //   setIncompleteTodos(newTodos);
+  //   setTodoText("");/*入力した後からの配列にする*/
+  // };
   const onClickAdd = () => {
-    if (todoText == "") return/*空文字ならここで終了*/
-    const newTodos = [...incompleteTodos, todoText];
-    setIncompleteTodos(newTodos);
-    setTodoText("");/*入力した後からの配列にする*/
-  };
-
-  const onClickDelete = (index) => {
-    const newTodos = [...incompleteTodos];
-    newTodos.splice(index, 1);/*特定の一覧のものを削除する*/
-    setIncompleteTodos(newTodos);/*その値をステートで更新する*/
+    if (todoText == "")  return
+    setIncompleteTodos([...incompleteTodos, { id: todoId, title: todoText, detail:todoDetail}])
+    setTodoId(todoId + 1)
+    setTodoText("")
+  }
+  const onClickDelete = (targetTodo) => {
+    // const newTodos = [...incompleteTodos];
+    // newTodos.splice(index, 1);/*特定の一覧のものを削除する*/
+    // setIncompleteTodos(newTodos);/*その値をステートで更新する*/
+    setIncompleteTodos(incompleteTodos.filter((todo) => todo !== targetTodo))
   };
     
   const onClickComplete = (index) => {
@@ -56,13 +66,13 @@ export const Todo = () => {
   }
 
   
-
+// 今はタイトルだけを変更している 追加した時にtitleとデテぃーるが
   return (
     <>
       <div>
         <h5>Live遠征の前にやること</h5>
         <input
-          placeholder="追加フォーム"
+          placeholder="やること"
           value={todoText}
           onChange={onChangeTodotext}
         />
@@ -71,10 +81,10 @@ export const Todo = () => {
           value={todoDescription}
           onChange={onChangeTodoDescription}
         /> */}
-        <input type="todoDescription" label="説明" />
+        <input  placeholder="説明"value={todoDetail} type="todoDescription" label="説明" onChange={onChangeTododetail} />
         <button onClick={onClickAdd}>追加</button>
       </div>
-      <div>
+      {/* <div>
         <p className="title">未完了</p>
         <ul>
           {incompleteTodos.map((todo,index) => (
@@ -87,34 +97,22 @@ export const Todo = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
       <div>
-        <p>進行中</p>
+        <p className="title">リスト</p>
         <ul>
-          {inprogressTodos.map((todo,index) => (
-            <li key={todo}>
-              <div className="incomplete-area">
-                <p className="title">{todo}</p>
-                <button onClick={() => onClickBack(index)}>戻る  </button>
-                <button onClick={() => onClickProgress(index)}>完了</button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        {incompleteTodos.map((todo) => (
+          <li key={todo.id}>
+            <span>{todo.id}</span>
+            <span>{todo.title}</span>
+            <span>{todo.status}</span>
+            <span>{todo.detail}</span>
+            <button onClick={() =>  onClickDelete(todo)}>削除</button>
+          </li>
+        ))}
+      </ul>
       </div>
-      <div>
-        <p>完了</p>
-        <ul>
-          {completeTodos.map((todo,index) => (
-            <li key={todo}>
-              <div className="incomplete-area">
-                <p className="title">{todo}</p>
-                <button onClick={() =>  onClickBack(index)} >戻る</button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      
     </>
   );
 };
