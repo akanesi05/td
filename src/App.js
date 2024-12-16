@@ -105,8 +105,12 @@ export const Todo = () => {
           <li key={todo.id}>
             <span>{todo.id}</span>
             <span>{todo.title}</span>
-            <span>{todo.status}</span>
             <span>{todo.detail}</span>
+            <select  value={todo.status}>
+            <option value="notStarted">未着手</option>
+            <option value="inProgress">作業中</option>
+             <option value="done">完了</option>
+             </select>
             <button onClick={() =>  onClickDelete(todo)}>削除</button>
           </li>
         ))}
