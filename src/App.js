@@ -2,7 +2,7 @@ import { useState } from "react";
 
 
 export const Todo = () => {
-  const [incompleteTodos, setIncompleteTodos] = useState([ {id:1,status:"完了",title:"うちわ",detail:"ファンサうちわ作る"},{id:2,status:"未完了",title:"新幹線",detail:"指定席取る"}]);
+  const [incompleteTodos, setIncompleteTodos] = useState([]);
 
   const [todoDetail, setTodoDetail] = useState("")
   const [todoText, setTodoText] = useState("");
@@ -16,12 +16,7 @@ export const Todo = () => {
   const onChangeTododetail = (event) => setTodoDetail(event.target.value);
   
   
-  // const onClickAdd = () => {
-  //   if (todoText == "") return/*空文字ならここで終了*/
-  //   const newTodos = [...incompleteTodos, todoText];このコードだと配列のままなのでリストに追加されない
-  //   setIncompleteTodos(newTodos);
-  //   setTodoText("");/*入力した後からの配列にする*/
-  // };
+  
   const onClickAdd = () => {
     if (todoText == "")  return
     setIncompleteTodos([...incompleteTodos, { id: todoId, title: todoText, detail:todoDetail}])
@@ -65,7 +60,15 @@ export const Todo = () => {
     setIncompleteTodos(newIncompleteTodos);
   }
 
-  
+  const handleStatusChange = (targetTodo, e) => {
+    console.log(targetTodo)
+
+    const newArray = incompleteTodos.map((todo) =>
+      incompleteTodos.id === targetTodo.id ? { ...incompleteTodos, status: e.target.value } : todo
+    )
+    setIncompleteTodos(newArray)
+  }
+
 // 今はタイトルだけを変更している 追加した時にtitleとデテぃーるが
   return (
     <>
@@ -106,7 +109,7 @@ export const Todo = () => {
             <span>{todo.id}</span>
             <span>{todo.title}</span>
             <span>{todo.detail}</span>
-            <select  value={todo.status}>
+            <select  value={todo.status} onChange={(e) => handleStatusChange(todo, e)}>
             <option value="notStarted">未着手</option>
             <option value="inProgress">作業中</option>
              <option value="done">完了</option>
