@@ -73,7 +73,7 @@ export const Todo = () => {
   return (
     <>
       <div>
-        <h5>Live遠征の前にやること</h5>
+        <h5 >Live遠征の前にやること</h5>
         <input
           placeholder="やること"
           value={todoText}
