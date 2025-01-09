@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './output.css'; 
 
 
 export const Todo = () => {
@@ -73,7 +74,10 @@ export const Todo = () => {
   return (
     <>
       <div>
-        <h5 >Live遠征の前にやること</h5>
+      <h3>
+      Hello world!
+      </h3>
+        <h5 class="text-blue-500">Live遠征の前にやること</h5>
         <input
           placeholder="やること"
           value={todoText}
@@ -101,6 +105,7 @@ export const Todo = () => {
           ))}
         </ul>
       </div> */}
+      
       <div>
         <p className="title">リスト</p>
         <ul>
