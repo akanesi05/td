@@ -73,11 +73,11 @@ export const Todo = () => {
 // 今はタイトルだけを変更している 追加した時にtitleとデテぃーるが
   return (
     <>
-      <div>
-      <h3>
-      Hello world!
-      </h3>
-        <h5 class="text-blue-500">Live遠征の前にやること</h5>
+       
+      <div class="text-center "> 
+        <h2 class="bg-green-400 w-100 h-20 text-center py-7">Live遠征の前にやること</h2>
+       
+      
         <input
           placeholder="やること"
           value={todoText}
@@ -106,8 +106,8 @@ export const Todo = () => {
         </ul>
       </div> */}
       
-      <div>
-        <p className="title">リスト</p>
+      <div class="box-border h-32 w-32 ">
+        <p className="title"  >リスト</p>
         <ul>
         {incompleteTodos.map((todo) => (
           <li key={todo.id}>
